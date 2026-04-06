@@ -6,11 +6,10 @@ from psycopg2.extras import RealDictCursor
 
 app = FastAPI(title="API Gimnasio")
 
-app.add_middleware(
-    CORSMiddleware,
-    origins = [
-    "https://fancy-griffin-42f3aa.netlify.app", # ¡Tu página en producción!
-    "http://localhost:5500", # Útil por si estás probando tu HTML localmente en tu compu
+# 1. Defines quién tiene permiso (Tu URL de Netlify y pruebas locales)
+origins = [
+    "https://fancy-griffin-42f3aa.netlify.app",
+    "http://localhost:5500",
     "http://127.0.0.1:5500"
 ]
 
@@ -19,9 +18,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"], # El "*" significa que permites POST, GET, PUT, DELETE, etc.
-    allow_headers=["*"], # Permite enviar cualquier tipo de dato (como JSON)
-)
+    allow_methods=["*"], 
+    allow_headers=["*"], 
 )
 
 # ⚠️ PEGA AQUÍ TU CONNECTION STRING DE SUPABASE (Empieza con postgresql://)
