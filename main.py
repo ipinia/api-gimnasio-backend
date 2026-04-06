@@ -8,10 +8,20 @@ app = FastAPI(title="API Gimnasio")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    origins = [
+    "https://fancy-griffin-42f3aa.netlify.app", # ¡Tu página en producción!
+    "http://localhost:5500", # Útil por si estás probando tu HTML localmente en tu compu
+    "http://127.0.0.1:5500"
+]
+
+# 2. Le agregas el filtro de seguridad (CORS) a tu app
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"], # El "*" significa que permites POST, GET, PUT, DELETE, etc.
+    allow_headers=["*"], # Permite enviar cualquier tipo de dato (como JSON)
+)
 )
 
 # ⚠️ PEGA AQUÍ TU CONNECTION STRING DE SUPABASE (Empieza con postgresql://)
